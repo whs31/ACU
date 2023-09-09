@@ -6,14 +6,17 @@
  * ---------------------------------------------------------------------- */
 
 #include "settings.h"
+#include <stdexcept>
 
 namespace Cogwheel
 {
-  Settings* Settings::get() { static Settings instance; return &instance; }
-  Settings::Settings(QObject* parent)
+  Settings* Settings::get(ISettingsProvider* provider) { static Settings instance(provider); return &instance; }
+  Settings::Settings(ISettingsProvider* provider, QObject* parent)
     : QObject(parent)
-    , m_io(/* TODO */)
+    , m_io(provider)
   {
+    if(not provider)
+      throw std::invalid_argument("Cogwheel.Settings.ctor: Null provider was passed to constructor");
     this->load();
   }
 

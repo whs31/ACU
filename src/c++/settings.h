@@ -19,7 +19,7 @@ namespace Cogwheel
     Q_PROPERTY(ISettingsProvider* io READ io WRITE setIo NOTIFY ioChanged)
 
     public:
-      static Settings* get();
+      static Settings* get(ISettingsProvider* provider);
       ~Settings() override = default;
 
       [[nodiscard]] ISettingsProvider* io() const;    void setIo(ISettingsProvider*);
@@ -37,7 +37,7 @@ namespace Cogwheel
       void ioChanged();
 
     private:
-      explicit Settings(QObject* parent = nullptr);
+      explicit Settings(ISettingsProvider* provider, QObject* parent = nullptr);
       Settings(const Settings&);
       Settings& operator=(const Settings&);
 
