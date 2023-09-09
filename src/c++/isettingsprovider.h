@@ -27,3 +27,4 @@ namespace Cogwheel
 } // Cogwheel
 
 Q_DECLARE_METATYPE(Cogwheel::ISettingsProvider*)
+Q_DECLARE_INTERFACE(Cogwheel::ISettingsProvider, "dummy");

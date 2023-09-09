@@ -18,14 +18,14 @@ namespace Cogwheel
     : m_filepath(QCoreApplication::applicationDirPath() + "/cfg/settings.json")
     , m_fallback_file(":/json/settings.json")
   {
-    qRegisterMetaType<MonoJsonSettingsProvider>("MonoJsonSettingsProvider");
+    qRegisterMetaType<MonoJsonSettingsProvider*>("MonoJsonSettingsProvider*");
   }
 
   MonoJsonSettingsProvider::MonoJsonSettingsProvider(QString filepath, QString fallback_file)
     : m_filepath(std::move(filepath))
     , m_fallback_file(std::move(fallback_file))
   {
-    qRegisterMetaType<MonoJsonSettingsProvider>("MonoJsonSettingsProvider");
+    qRegisterMetaType<MonoJsonSettingsProvider*>("MonoJsonSettingsProvider*");
   }
 
   QVariant MonoJsonSettingsProvider::read(const QString& key) const noexcept

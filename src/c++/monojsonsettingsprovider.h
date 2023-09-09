@@ -17,6 +17,7 @@ namespace Cogwheel
   class MonoJsonSettingsProvider : public ISettingsProvider
   {
     Q_GADGET
+    Q_INTERFACES(Cogwheel::ISettingsProvider)
 
     public:
       MonoJsonSettingsProvider();
@@ -34,3 +35,5 @@ namespace Cogwheel
       map<QString, QVariant> m_json;
   };
 } // Cogwheel
+
+Q_DECLARE_METATYPE(Cogwheel::MonoJsonSettingsProvider*)

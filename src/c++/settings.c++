@@ -18,6 +18,7 @@ namespace Cogwheel
     if(not provider)
       throw std::invalid_argument("Cogwheel.Settings.ctor: Null provider was passed to constructor");
     this->load();
+    qRegisterMetaType<ISettingsProvider*>("ISettingsProvider*");
   }
 
   ISettingsProvider* Settings::io() const { return m_io; }
