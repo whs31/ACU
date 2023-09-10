@@ -1,8 +1,8 @@
 /* ---------------------------------------------------------------------
- * Cogwheel - Application settings and config library
+ * ACU - Application Core Utilities Library
  * Copyright (C) 2023 whs31.
  *
- * github.com/whs31/cogwheel
+ * github.com/whs31/acu
  * ---------------------------------------------------------------------- */
 
 #include "monojsonsettingsprovider.h"
@@ -12,17 +12,19 @@
 #include <QtCore/QJsonObject>
 #include <QtCore/QCoreApplication>
 
-namespace Cogwheel
+namespace ACU
 {
-  MonoJsonSettingsProvider::MonoJsonSettingsProvider()
-    : m_filepath(QCoreApplication::applicationDirPath() + "/cfg/settings.json")
+  MonoJsonSettingsProvider::MonoJsonSettingsProvider(QObject* parent)
+    : ISettingsProvider(parent)
+    , m_filepath(QCoreApplication::applicationDirPath() + "/cfg/settings.json")
     , m_fallback_file(":/json/settings.json")
   {
     qRegisterMetaType<MonoJsonSettingsProvider*>("MonoJsonSettingsProvider*");
   }
 
-  MonoJsonSettingsProvider::MonoJsonSettingsProvider(QString filepath, QString fallback_file)
-    : m_filepath(std::move(filepath))
+  MonoJsonSettingsProvider::MonoJsonSettingsProvider(QString filepath, QString fallback_file, QObject* parent)
+    : ISettingsProvider(parent)
+    , m_filepath(std::move(filepath))
     , m_fallback_file(std::move(fallback_file))
   {
     qRegisterMetaType<MonoJsonSettingsProvider*>("MonoJsonSettingsProvider*");
@@ -78,4 +80,4 @@ namespace Cogwheel
       file.close();
     }
   }
-} // Cogwheel
+} // ACU

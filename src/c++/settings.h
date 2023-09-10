@@ -1,17 +1,17 @@
 /* ---------------------------------------------------------------------
- * Cogwheel - Application settings and config library
+ * ACU - Application Core Utilities Library
  * Copyright (C) 2023 whs31.
  *
- * github.com/whs31/cogwheel
+ * github.com/whs31/acu
  * ---------------------------------------------------------------------- */
 
 #pragma once
 
 #include <QtCore/QObject>
 #include <QtCore/QVariant>
-#include "Cogwheel/ISettingsProvider"
+#include "ACU/Config/ISettingsProvider"
 
-namespace Cogwheel
+namespace ACU
 {
   class Settings : public QObject
   {
@@ -44,4 +44,4 @@ namespace Cogwheel
     private:
       ISettingsProvider* m_io;
   };
-} // Cogwheel
+} // ACU

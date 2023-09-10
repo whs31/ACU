@@ -1,27 +1,26 @@
 /* ---------------------------------------------------------------------
- * Cogwheel - Application settings and config library
+ * ACU - Application Core Utilities Library
  * Copyright (C) 2023 whs31.
  *
- * github.com/whs31/cogwheel
+ * github.com/whs31/acu
  * ---------------------------------------------------------------------- */
 
 #pragma once
 
 #include <map>
-#include "Cogwheel/ISettingsProvider"
+#include "ACU/Config/ISettingsProvider"
 
 using std::map;
 
-namespace Cogwheel
+namespace ACU
 {
   class MonoJsonSettingsProvider : public ISettingsProvider
   {
-    Q_GADGET
-    Q_INTERFACES(Cogwheel::ISettingsProvider)
+    Q_OBJECT
 
     public:
-      MonoJsonSettingsProvider();
-      MonoJsonSettingsProvider(QString filepath, QString fallback_file);
+      explicit MonoJsonSettingsProvider(QObject* parent = nullptr);
+      MonoJsonSettingsProvider(QString filepath, QString fallback_file, QObject* parent = nullptr);
 
       [[nodiscard]] invokable QVariant read(const QString& key) const noexcept override;
       void write(const QString& key, const QVariant& value) noexcept override;
@@ -34,6 +33,6 @@ namespace Cogwheel
       QString m_fallback_file;
       map<QString, QVariant> m_json;
   };
-} // Cogwheel
+} // ACU
 
-Q_DECLARE_METATYPE(Cogwheel::MonoJsonSettingsProvider*)
+Q_DECLARE_METATYPE(ACU::MonoJsonSettingsProvider*)

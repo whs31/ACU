@@ -1,21 +1,22 @@
 /* ---------------------------------------------------------------------
- * Cogwheel - Application settings and config library
+ * ACU - Application Core Utilities Library
  * Copyright (C) 2023 whs31.
  *
- * github.com/whs31/cogwheel
+ * github.com/whs31/acu
  * ---------------------------------------------------------------------- */
 
 #pragma once
 
+#include <QtCore/QObject>
 #include <QtCore/QMetaType>
 #include <QtCore/QVariant>
 #define invokable Q_INVOKABLE
 
-namespace Cogwheel
+namespace ACU
 {
-  class ISettingsProvider
+  class ISettingsProvider : public QObject
   {
-    Q_GADGET
+    Q_OBJECT
 
     public:
       [[nodiscard]] invokable virtual QVariant read(const QString& key) const noexcept = 0;
@@ -23,8 +24,18 @@ namespace Cogwheel
 
       virtual void load() noexcept = 0;
       virtual void save() const noexcept = 0;
-  };
-} // Cogwheel
 
-Q_DECLARE_METATYPE(Cogwheel::ISettingsProvider*)
-Q_DECLARE_INTERFACE(Cogwheel::ISettingsProvider, "dummy");
+    protected:
+      explicit ISettingsProvider(QObject* parent = nullptr);
+  };
+} // ACU
+
+Q_DECLARE_METATYPE(ACU::ISettingsProvider*)
+Q_DECLARE_INTERFACE(ACU::ISettingsProvider, "acu");
+
+namespace ACU
+{
+  inline ISettingsProvider::ISettingsProvider(QObject* parent)
+      : QObject(parent)
+  {}
+} // ACU

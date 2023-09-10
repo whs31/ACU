@@ -1,14 +1,14 @@
 /* ---------------------------------------------------------------------
- * Cogwheel - Application settings and config library
+ * ACU - Application Core Utilities Library
  * Copyright (C) 2023 whs31.
  *
- * github.com/whs31/cogwheel
+ * github.com/whs31/acu
  * ---------------------------------------------------------------------- */
 
 #include "settings.h"
 #include <stdexcept>
 
-namespace Cogwheel
+namespace ACU
 {
   Settings* Settings::get(ISettingsProvider* provider) { static Settings instance(provider); return &instance; }
   Settings::Settings(ISettingsProvider* provider, QObject* parent)
@@ -29,4 +29,4 @@ namespace Cogwheel
   void Settings::load() noexcept { io()->load(); emit ioChanged(); }
   void Settings::revert() noexcept { this->load(); }
   QVariant Settings::read(const QString& key) const noexcept { return io()->read(key); }
-} // Cogwheel
+} // ACU
