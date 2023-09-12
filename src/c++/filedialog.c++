@@ -71,11 +71,11 @@ namespace ACU
       bool is_hidden = item.completeBaseName().isEmpty();
       if(item.isDir())
       {
-        m_storage.emplace_back(true, is_hidden ? item.fileName() : item.completeBaseName(), QString::number(QDir(item.filePath()).count()) + " files",
+        m_storage.emplace_back(true, item.fileName(), QString::number(QDir(item.filePath()).count()) + " files",
                                item.lastModified(), "");
         continue;
       }
-      m_storage.emplace_back(false, is_hidden ? item.fileName() : item.completeBaseName(), parseSize(item.size()),
+      m_storage.emplace_back(false, item.fileName(), parseSize(item.size()),
                              item.lastModified(), is_hidden ? "" : item.suffix());
       endInsertRows();
     }

@@ -30,22 +30,31 @@ Popup {
             height: 24
             contentHeight: 24
             RowLayout {
+                spacing: 0
+
+                component InlineSeparator : ToolSeparator {
+                    Layout.preferredHeight: 24
+                    padding: 0
+                }
                 anchors.fill: parent
                 ToolButton {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 24
                     text: "Имя"
                 }
+                InlineSeparator {}
                 ToolButton {
                     Layout.preferredHeight: 24
                     Layout.preferredWidth: 200
                     text: "Дата изменения"
                 }
+                InlineSeparator {}
                 ToolButton {
                     Layout.preferredHeight: 24
                     Layout.preferredWidth: 200
                     text: "Тип"
                 }
+                InlineSeparator {}
                 ToolButton {
                     Layout.preferredHeight: 24
                     Layout.preferredWidth: 200
@@ -76,6 +85,7 @@ Popup {
 
                 RowLayout {
                     anchors.fill: parent
+                    spacing: 0
 
                     Label {
                         Layout.leftMargin: 50
@@ -89,14 +99,14 @@ Popup {
 
                     Label {
                         Layout.preferredHeight: 24
-                        Layout.preferredWidth: 200
+                        Layout.preferredWidth: 230
                         text: lastChanged.toLocaleDateString(Qt.locale("ru_RU"))
                         color: theme.subtext0
                     }
 
                     Label {
                         Layout.preferredHeight: 24
-                        Layout.preferredWidth: 200
+                        Layout.preferredWidth: 220
                         text: isDirectory ? "Папка с файлами"
                                           : "Файл \"" + extension + "\""
                         color: theme.subtext0
@@ -104,7 +114,7 @@ Popup {
 
                     Label {
                         Layout.preferredHeight: 24
-                        Layout.preferredWidth: 200
+                        Layout.preferredWidth: 210
                         text: size
                         color: theme.subtext0
                     }
