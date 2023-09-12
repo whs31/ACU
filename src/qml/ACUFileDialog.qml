@@ -1,5 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Controls.Material 2.15
 import ACU.Dialogs 1.0
 
 Popup {
@@ -14,15 +16,16 @@ Popup {
     ListView {
         anchors.fill: parent
         model: ACUFileDialogImpl {}
-        delegate: Label {
+        delegate: ItemDelegate {
             required property int index
             required property bool isDirectory
             required property string name
             required property string size
             required property date lastChanged
             required property string extension
-            required property string icon
+            required property string iconPath
 
+            width: parent.width
             text: name
         }
     }

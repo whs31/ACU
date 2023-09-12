@@ -31,7 +31,7 @@ namespace ACU
     roles[Size] = "size";
     roles[LastChanged] = "lastChanged";
     roles[Extension] = "extension";
-    roles[Icon] = "icon";
+    roles[Icon] = "iconPath";
     return roles;
   }
 
@@ -59,19 +59,20 @@ namespace ACU
   void FileDialog::setPath(const QString& x)
   {
     m_storage.clear();
-    QDir dir(x, "*", QDir::Name | QDir::IgnoreCase, QDir::Files | QDir::Hidden | QDir::Dirs | QDir::NoDotAndDotDot);
+    QDir dir(x, "*", QDir::DirsFirst | QDir::Name | QDir::IgnoreCase, QDir::Files | QDir::Hidden | QDir::Dirs | QDir::NoDotAndDotDot);
 
     for(const QFileInfo& item in dir.entryInfoList())
     {
       beginInsertRows(QModelIndex(), rowCount(), rowCount());
+      bool is_hidden = item.completeBaseName().isEmpty();
       if(item.isDir())
       {
-        m_storage.emplace_back(true, item.completeBaseName(), QString::number(QDir(item.filePath()).count()) + " files",
-                               item.lastModified(), item.suffix());
+        m_storage.emplace_back(true, is_hidden ? item.fileName() : item.completeBaseName(), QString::number(QDir(item.filePath()).count()) + " files",
+                               item.lastModified(), is_hidden ? "" : item.suffix());
         continue;
       }
-      m_storage.emplace_back(false, item.completeBaseName(), parseSize(item.size()),
-                             item.lastModified(), item.suffix());
+      m_storage.emplace_back(false, is_hidden ? item.fileName() : item.completeBaseName(), parseSize(item.size()),
+                             item.lastModified(), is_hidden ? "" : item.suffix());
       endInsertRows();
     }
   }
