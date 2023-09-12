@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/acu">
+        <file>ACUFileDialog.qml</file>
+    </qresource>
+</RCC>
