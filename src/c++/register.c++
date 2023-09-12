@@ -9,7 +9,7 @@
 #include <QtQml/qqml.h>
 #include "ACU/FileDialog"
 
-inline void initResources() { Q_INIT_RESOURCE(acu); }
+inline void initResources() { Q_INIT_RESOURCE(acu); Q_INIT_RESOURCE(acu_rc);  }
 
 namespace ACU
 {

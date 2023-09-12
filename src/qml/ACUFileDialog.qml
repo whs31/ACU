@@ -11,6 +11,7 @@ Popup {
     modal: true
     closePolicy: Popup.CloseOnPressOutside | Popup.CloseOnEscape
     visible: true
+    font.family: null
 
     Overlay.modal: Rectangle { color: "#66000000" }
     ListView {
@@ -27,6 +28,9 @@ Popup {
 
             width: parent.width
             text: name
+            icon {
+                source: iconPath
+            }
         }
     }
 }

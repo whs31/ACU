@@ -16,7 +16,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets Quick)
 include_directories(src/c++ include)
 file(GLOB_RECURSE ACU_CORE src/c++/*)
 file(GLOB_RECURSE ACU_CORE_INCLUDE include/*)
-set(SRC ${ACU_CORE} ${ACU_CORE_INCLUDE} src/qml/acu.qrc)
+set(SRC ${ACU_CORE} ${ACU_CORE_INCLUDE} src/qml/acu.qrc resources/acu_rc.qrc)
 
 add_library(${PROJECT_NAME} ${SRC})
 

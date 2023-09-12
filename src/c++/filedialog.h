@@ -8,12 +8,14 @@
 #pragma once
 
 #include <vector>
+#include <map>
 #include <QtCore/QObject>
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QDateTime>
 #include "ACU/Definitions"
 
 using std::vector;
+using std::map;
 
 namespace ACU
 {
@@ -63,6 +65,7 @@ namespace ACU
 
     private:
       vector<FileEntry> m_storage;
+      static map<QString, QString> IconDictionary;
       QString m_path;
   };
 } // ACU

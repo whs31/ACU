@@ -16,6 +16,10 @@ using std::array;
 
 namespace ACU
 {
+  map<QString, QString> FileDialog::IconDictionary = {
+    {"folder", "qrc:/acu/icons/folder.svg"},
+    {"file", "qrc:/acu/icons/file.svg"}
+  };
   FileDialog::FileDialog(QObject* parent)
     : QAbstractListModel(parent)
   {
@@ -68,7 +72,7 @@ namespace ACU
       if(item.isDir())
       {
         m_storage.emplace_back(true, is_hidden ? item.fileName() : item.completeBaseName(), QString::number(QDir(item.filePath()).count()) + " files",
-                               item.lastModified(), is_hidden ? "" : item.suffix());
+                               item.lastModified(), "");
         continue;
       }
       m_storage.emplace_back(false, is_hidden ? item.fileName() : item.completeBaseName(), parseSize(item.size()),
@@ -108,8 +112,12 @@ namespace ACU
     , size("0 B")
     , last_changed(QDateTime())
     , extension("file")
-    , icon("") // @TODO
-  {}
+  {
+    if(is_directory)
+      icon = FileDialog::IconDictionary["folder"];
+    else
+      icon = FileDialog::IconDictionary["file"];
+  }
 
   FileDialog::FileEntry::FileEntry(bool is_directory, QString name, QString size,
                                    QDateTime last_changed, QString extension)
@@ -118,6 +126,10 @@ namespace ACU
     , size(std::move(size))
     , last_changed(std::move(last_changed))
     , extension(std::move(extension))
-    , icon("") // @TODO
-  {}
+  {
+    if(is_directory)
+      icon = FileDialog::IconDictionary["folder"];
+    else
+      icon = FileDialog::IconDictionary["file"];
+  }
 } // ACU

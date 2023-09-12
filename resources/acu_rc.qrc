@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/acu">
+        <file>icons/file.svg</file>
+        <file>icons/folder.svg</file>
+    </qresource>
+</RCC>
