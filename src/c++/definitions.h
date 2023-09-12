@@ -10,3 +10,4 @@
 #include <QtCore/QtGlobal>
 
 #define invokable Q_INVOKABLE
+#define MODEL_READ_ERROR "Error reading from model"
